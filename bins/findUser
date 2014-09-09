@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo -n "Enter user name: "
+read THEUSERNAME
+
+THEUSERID=$(finger $THEUSERNAME | grep Office | awk '{print $NF}')
+
+w3m -dump "http://www.hzdr.de/db/ContMan.Visi.Card?pNid=no&pUser="$THEUSERID | head -n16

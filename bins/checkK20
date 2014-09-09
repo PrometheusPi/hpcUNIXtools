@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo " "
+for i in `seq -fkepler%03.0f  19`
+do 
+    echo $i:
+    ssh $i 'nvidia-smi' 2>/dev/null
+    echo " "
+done
