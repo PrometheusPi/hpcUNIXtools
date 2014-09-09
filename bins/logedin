@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for n in `who | awk '{print $1}' | sort | uniq | xargs`
+do
+    echo -e $n "  \t  \t " `username $n`
+done

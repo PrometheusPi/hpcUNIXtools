@@ -1,0 +1,4 @@
+#!/bin/bash
+
+qstat -t | grep hypnos | awk '{print $3}' | sort | uniq -c | sort -nr 
+#| awk '{print $1 "\t " $2 "\t " (system(username )$2) }'
