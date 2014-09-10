@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+if [ $# = 0 ]
+    then USER=$(whoami)
+    else USER=$1
+fi
+
+echo ""
+for i in `squeue -u $USER -t PENDING | grep gpu | awk '{print $1}'`
+do 
+    JOBINFO=$(scontrol show job $i | grep JobId)
+    TIME=$(scontrol show job $i | grep StartTime | awk '{print $1}')
+    if [ $TIME != "StartTime=Unknown" ]
+	then echo $JOBINFO
+	     echo $TIME
+	     echo ""
+    fi
+done 
