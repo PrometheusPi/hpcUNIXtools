@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo -e "\n \n"
+
+printf "%10s --> %10s \n" "Richard" "s5960712"
+squeue -u s5960712 -o  "%40j %.3t %.10M %.6D %.20R %.10p"
+
+echo -e "\n ------------------- \n"
+
+printf "%10s --> %10s \n" "Rene" "widera"
+squeue -u widera -o  "%40j %.3t %.10M %.6D %.20R %.10p"
+
+
+echo -e "\n ------------------- \n"
+
+printf "%10s --> %10s \n" "Axel" "s4343183"
+squeue -u s4343183 -o  "%40j %.3t %.10M %.6D %.20R %.10p"
+
+echo -e "\n ------------------- \n"
+
+printf "%10s --> %10s \n" "Felix" "s4343183"
+squeue -u fschmitt -o  "%40j %.3t %.10M %.6D %.20R %.10p"
+
+
+
+
+echo -e "\n \n"
