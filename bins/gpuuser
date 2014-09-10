@@ -1,0 +1,20 @@
+#!/bin/bash
+
+GPUUSER=$(squeue -p gpu | awk '{print $4}' | sort | uniq | grep -v USER)
+printTemplate1="%12s | %6s \n"
+printTemplate2="%12s | %6d \n"
+
+#echo $GPUUSER
+
+
+printf "%12s | %6s | %7s | %18s\n" "USER" "JOBS" "RUNNING" "MAX PRIORITY"
+printf "%12s | %6s | %7s | %18s\n" "------------" "------" "-------" "------------------"
+
+for i in $GPUUSER
+do
+    numberOfJobs=$(squeue -p gpu -u $i | grep $i | wc -l)
+    numberOfRunningJobs=$(squeue -p gpu -t R -u $i | grep $i | wc -l)
+    priority=$(squeue -o "%p" -p gpu -t PENDING -u $i | sort -n | tail -n1)
+    printf "%12s | %6d | %7s | %18s \n" $i $numberOfJobs $numberOfRunningJobs $priority
+done
+	
