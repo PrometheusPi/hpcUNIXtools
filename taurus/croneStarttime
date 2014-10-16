@@ -1,11 +1,16 @@
 #!/bin/bash
 
+# get date
 DATE_HUMAN=$(date +%Y-%m-%dT%H:%m:%S)
 DATE_UNIX=$(date +%s)
+
+# get user name
 USER=$(whoami)
+
+# template for output
 TEMPLATE="%s \t %s \t %s \t %s \n"
 
-
+# for each of the user pending jobs on the gpu queue 
 for i in `squeue -u $USER -t PENDING | grep gpu | awk '{print $1}'`
 do
     # check and create log file
