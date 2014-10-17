@@ -1,0 +1,4 @@
+# set this via 'crontabe -e'
+
+# min hour day month DOW command
+0,30 * * * * ./croneStarttime
