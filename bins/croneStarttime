@@ -22,13 +22,14 @@ do
     fi
 
     # get starttime
-    STARTTIME_HUMAN=$(scontrol show job $i | grep StartTime | awk '{print $1}' | sed -e 's/StartTime=//g' | sed -e 's/T/ /g')
+    STARTTIME_HUMAN=$(scontrol show job $i | grep StartTime | awk '{print $1}' | sed -e 's/StartTime=//g')
+    echo $STARTTIME_HUMAN
     
     if [ -f $LOG_FILENAME ]
     then
-        if [ $STARTTIME_HUMAN != "Unknown" ]
+        if [ "$STARTTIME_HUMAN" != "Unknown" ]
         then
-	    STARTTIME_UNIX=$(date -d $STARTTIME_HUMAN +%s)
+	    STARTTIME_UNIX=$(date -d "`echo $STARTTIME_HUMAN  | sed -e 's/T/ /g'`" +%s)
 	    printf "$TEMPLATE" $DATE_HUMAN $DATE_UNIX $STARTTIME_HUMAN $STARTTIME_UNIX >> $LOG_FILENAME 
         fi
     fi
