@@ -1,0 +1,4 @@
+#!/bin/bash
+
+~/bin/hpcUNIXtools/bins/plotStarttime.py -l ~/log
+
