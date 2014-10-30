@@ -26,7 +26,7 @@ logDirectory = args.path2log
 
 
 fontsize=14
-plt.figure("starttime")
+fig = plt.figure()
 ax = plt.subplot(111)
 ax.set_xlabel("time", fontsize=fontsize)
 ax.set_ylabel("time till estimated start [days]", fontsize=fontsize)
@@ -37,10 +37,15 @@ maxDurration = 0.0
 # go through each file
 for logfile in os.listdir(logDirectory):
     if (logfile.startswith("starttime_") and logfile.endswith(".log")):
+        print logfile
         # extract job id from filename
         name = (re.search("starttime_(.+?).log", logfile)).group(1)
         # get data
-        data = np.loadtxt(logfile, usecols=(1,3))
+        data = np.loadtxt(logDirectory+"/"+logfile, usecols=(1,3))
+        # skip if only a 
+        if len(np.shape(data)) == 1:
+            continue
+
         # convert  unix time to  dates
         time_humanReadable = [dt.datetime.fromtimestamp(ts) for ts in data[:,0]]
         # convert to fractional date in days starting from year 1
@@ -59,7 +64,8 @@ plt.xticks( rotation=90 )
 xfmt = DateFormatter('%d.%m.%Y %H:%M')
 ax.xaxis.set_major_formatter(xfmt)
 plt.ylim(0, 1.1*maxDurration)
-plt.legend(loc=0, fontsize=fontsize)
+plt.legend(loc=0)
 
-plt.tight_layout()
+fig.subplots_adjust(bottom=0.35)
+#plt.tight_layout()
 plt.show()
