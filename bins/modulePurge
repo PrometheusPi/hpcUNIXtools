@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source /etc/profile.modules
+
+for oneEntry in `module list 2>&1`
+do
+    oneModule=$(echo $oneEntry | grep / | tail -r)
+    if [ ! -z $oneModule ]
+    then 
+#        echo $oneModule
+        module unload $oneModule
+    fi
+done
