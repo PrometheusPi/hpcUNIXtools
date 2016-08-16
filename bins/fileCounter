@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]
+then 
+     DIR=.
+else
+     DIR=$1
+fi
+
+echo searching in $DIR ...
+echo Warning: space characters will lead to errors!
+
+for i in `find $DIR -maxdepth 1 -mindepth 1 -type d`
+do 
+   NFILES=`find $i -type f | wc -l`
+   echo $i  $NFILES
+done
+
